@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz App</title>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+            background-color: lavender;
+            text-align: center;
+            margin: auto;
+            padding: 20px;
+        }
+        .question {
+            font-size: 20px;
+            color: darkblue;
+            margin: 20px;
+        }
+        button {
+            background-color: lightcoral;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            color: white;
+        }
+        button:hover {
+            background-color: crimson;
+        }
+        button:disabled {
+            background-color: gray;
+            cursor: not-allowed;
+        }
+		
+        #result {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz App</h1>
+    <div class="question" id="question"></div>
+    <div id="options"></div>
+    <div id="result"></div>
+    <button id="nextBtn" onclick="nextQuestion()">Next Question</button>
+
+    <script>
+        // Quiz Questions
+        const quiz = [
+            { question: "What is the capital of India?", options: ["Delhi", "Mumbai", "Kolkata", "Chennai"], answer: "Delhi" },
+            { question: "What is the largest planet in our solar system?", options: ["Earth", "Mars", "Jupiter", "Saturn"], answer: "Jupiter" },
+            { question: "Who wrote the play 'Hamlet'?", options: ["Shakespeare", "Charles Dickens", "Mark Twain", "Homer"], answer: "Shakespeare" },
+            { question: "What is the chemical symbol for water?", options: ["H2O", "O2", "CO2", "NaCl"], answer: "H2O" },
+            { question: "Which animal is known as the King of the Jungle?", options: ["Tiger", "Lion", "Elephant", "Bear"], answer: "Lion" },
+            { question: "How many continents are there in the world?", options: ["5", "6", "7", "8"], answer: "7" },
+            { question: "What is the square root of 64?", options: ["6", "8", "10", "12"], answer: "8" },
+            { question: "Which planet is known as the Red Planet?", options: ["Mars", "Venus", "Earth", "Mercury"], answer: "Mars" },
+            { question: "What is the national flower of India?", options: ["Rose", "Lotus", "Sunflower", "Marigold"], answer: "Lotus" },
+            { question: "Who is known as the Father of the Nation in India?", options: ["Subhash Chandra Bose", "Jawaharlal Nehru", "Mahatma Gandhi", "B. R. Ambedkar"], answer: "Mahatma Gandhi" },
+            { question: "What is the boiling point of water in Celsius?", options: ["90", "100", "110", "120"], answer: "100" }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const questionElement = document.getElementById("question");
+            const optionsElement = document.getElementById("options");
+            const nextButton = document.getElementById("nextBtn");
+            const resultElement = document.getElementById("result");
+
+            resultElement.textContent = ""; // Clear previous result
+            nextButton.style.display = "none"; // Hide Next button initially
+
+            const currentQuestion = quiz[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
+
+            // Load options dynamically
+            optionsElement.innerHTML = ""; // Clear previous options
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = () => checkAnswer(button, option);
+                optionsElement.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedButton, selectedAnswer) {
+            const resultElement = document.getElementById("result");
+            const nextButton = document.getElementById("nextBtn");
+            const currentQuestion = quiz[currentQuestionIndex];
+            const optionsElement = document.getElementById("options");
+
+            // Disable all buttons after an answer is selected
+            const allButtons = optionsElement.querySelectorAll("button");
+            allButtons.forEach(button => button.disabled = true);
+
+            if (selectedAnswer === currentQuestion.answer) {
+                resultElement.textContent = "Correct! Great job!";
+                resultElement.style.color = "green";
+                score++;
+            } else {
+                resultElement.textContent = `Incorrect. The correct answer is ${currentQuestion.answer}.`;
+                resultElement.style.color = "red";
+            }
+
+            nextButton.style.display = "inline-block"; // Show Next button
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quiz.length) {
+                loadQuestion();
+            } else {
+                showFinalScore();
+            }
+        }
+
+        function showFinalScore() {
+            const questionElement = document.getElementById("question");
+            const optionsElement = document.getElementById("options");
+            const resultElement = document.getElementById("result");
+            const nextButton = document.getElementById("nextBtn");
+
+            questionElement.textContent = "Quiz Completed!";
+            optionsElement.innerHTML = `Your final score is ${score} out of ${quiz.length}.`;
+            resultElement.textContent = "";
+            nextButton.style.display = "none"; // Hide Next button
+        }
+
+        // Initialize the quiz
+        loadQuestion();
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Quiz Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Online Quiz Portal</h1>
+
+        <!-- Quiz Timer -->
+        <div id="timer" class="timer">Time Left: 60</div>
+
+        <!-- Quiz Questions -->
+        <form id="quizForm">
+            <div class="question">
+                <p>1. What is 2 + 2?</p>
+                <label><input type="radio" name="q1" value="2"> 2</label>
+                <label><input type="radio" name="q1" value="3"> 3</label>
+                <label><input type="radio" name="q1" value="4"> 4</label>
+                <label><input type="radio" name="q1" value="5"> 5</label>
+            </div>
+
+            <div class="question">
+                <p>2. What is 3 + 5?</p>
+                <label><input type="radio" name="q2" value="5"> 5</label>
+                <label><input type="radio" name="q2" value="8"> 8</label>
+                <label><input type="radio" name="q2" value="6"> 6</label>
+                <label><input type="radio" name="q2" value="7"> 7</label>
+            </div>
+
+            <div class="question">
+                <p>3. What is the capital of France?</p>
+                <label><input type="radio" name="q3" value="Berlin"> Berlin</label>
+                <label><input type="radio" name="q3" value="Madrid"> Madrid</label>
+                <label><input type="radio" name="q3" value="Paris"> Paris</label>
+                <label><input type="radio" name="q3" value="Rome"> Rome</label>
+            </div>
+
+            <button type="button" onclick="submitQuiz()">Submit Quiz</button>
+        </form>
+
+        <div id="result" class="result" style="display:none;">
+            <h2>Your Score: <span id="score"></span></h2>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

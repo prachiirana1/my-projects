@@ -1,0 +1,19 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.hero {
+    background-size: cover;
+    background-position: center;
+}
+
+footer {
+    font-size: 0.9rem;
+    color: #aaa;
+}

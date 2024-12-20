@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Calculator</title>
+  <style>
+    /* Body styling for center alignment */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: lightsteelblue;
+      margin: 0;
+    }
+
+    /* Calculator container styling */
+    .calculator {
+      background-color: white;
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      width: 350px;
+    }
+
+    /* Display input styling */
+    .display {
+      width: 100%;
+      height: 60px;
+      font-size: 28px;
+      text-align: right;
+      margin-bottom: 20px;
+      padding: 10px;
+      border: none;
+      background-color: lavender;
+      border-radius: 10px;
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Button container grid layout */
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    /* Button styling */
+    .button {
+      padding: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      background-color: whitesmoke;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s;
+    }
+
+    /* Button hover effect */
+    .button:hover {
+      background-color: lightgray;
+    }
+
+    /* Operator buttons styling */
+    .operator {
+      background-color: cornflowerblue;
+      color: white;
+    }
+
+    /* Equal button styling */
+    .equal {
+      background-color: mediumseagreen;
+      color: white;
+      grid-column: span 4;
+    }
+
+    /* Button press effect */
+    .button:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+
+<div class="calculator">
+  <!-- Display to show input and results -->
+  <input type="text" id="display" class="display" disabled>
+
+  <!-- Buttons for numbers and operators -->
+  <div class="buttons">
+    <button class="button" onclick="appendValue('7')">7</button>
+    <button class="button" onclick="appendValue('8')">8</button>
+    <button class="button" onclick="appendValue('9')">9</button>
+    <button class="button operator" onclick="appendValue('/')">/</button>
+
+    <button class="button" onclick="appendValue('4')">4</button>
+    <button class="button" onclick="appendValue('5')">5</button>
+    <button class="button" onclick="appendValue('6')">6</button>
+    <button class="button operator" onclick="appendValue('*')">*</button>
+
+    <button class="button" onclick="appendValue('1')">1</button>
+    <button class="button" onclick="appendValue('2')">2</button>
+    <button class="button" onclick="appendValue('3')">3</button>
+    <button class="button operator" onclick="appendValue('-')">-</button>
+
+    <button class="button" onclick="appendValue('0')">0</button>
+    <button class="button" onclick="appendValue('.')">.</button>
+    <button class="button" onclick="clearDisplay()">C</button>
+    <button class="button operator" onclick="appendValue('+')">+</button>
+
+    <button class="button equal" onclick="calculateResult()">=</button>
+  </div>
+</div>
+
+<script>
+  // Append value to the display
+  function appendValue(value) {
+    document.getElementById('display').value += value;
+  }
+
+  // Clear the display
+  function clearDisplay() {
+    document.getElementById('display').value = '';
+  }
+
+  // Calculate the result
+  function calculateResult() {
+    try {
+      document.getElementById('display').value = eval(document.getElementById('display').value);
+    } catch (error) {
+      document.getElementById('display').value = 'Error';
+    }
+  }
+</script>
+
+</body>
+</html>

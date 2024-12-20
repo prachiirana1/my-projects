@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightblue;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: darkblue;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+        button {
+            background-color: lightred;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: limegreen;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+<body>
+    <h1>Expense Tracker</h1>
+    <div>
+        <input type="text" id="expenseName" placeholder="Enter Expense Name">
+        <input type="number" id="expenseAmount" placeholder="Enter Amount">
+        <button onclick="addExpense()">Add Expense</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Expense Name</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="expenseList"></tbody>
+		<br><br>
+    </table>
+
+    <script>
+        function addExpense() {
+            const name = document.getElementById("expenseName").value;
+            const amount = document.getElementById("expenseAmount").value;
+
+            if (name && amount) {
+                const table = document.getElementById("expenseList");
+                const row = table.insertRow();
+                row.innerHTML = `
+                    <td>${name}</td>
+                    <td>${amount}</td>
+                    <td>
+                        <button onclick="deleteExpense(this)">Delete</button>
+                    </td>
+                `;
+
+                document.getElementById("expenseName").value = '';
+                document.getElementById("expenseAmount").value = '';
+            } else {
+                alert("Please fill out both fields.");
+            }
+        }
+
+        function deleteExpense(button) {
+            const row = button.parentElement.parentElement;
+            row.remove();
+        }
+    </script>
+</body>
+</html>
